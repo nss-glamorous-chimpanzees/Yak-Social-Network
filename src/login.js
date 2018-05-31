@@ -1,5 +1,5 @@
 import React from 'react';
-import UserChecker from './loginChecker';
+
 
 
 
@@ -22,17 +22,15 @@ class NameForm extends React.Component {
         fetch(`http://127.0.0.1:8088/users?email=${this.state.email}&password=${this.state.password}`)
         .then(response => response.json())
         .then(data => {
-            // this.setState({
-            //     email: data.email,
-            //     userId: data.userId,
-            //     password: data.password
+             let userId = data[0].id
+            sessionStorage.setItem('userId', userId);
+            console.log(data[0].id)
             // })
             // 
-            console.log(data)
+            // console.log(data)
             
         })
     //   if (this.state === UserChecker) {
-          console.log("UserChecker",UserChecker)
           event.preventDefault()
     //   }
     }
