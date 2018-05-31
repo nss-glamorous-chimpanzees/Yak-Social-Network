@@ -2,6 +2,10 @@ h1 {
   color: red;
 }
 
-input {
+label {
+
+}
+
+input, select {
   display: block;
 }

@@ -44,7 +44,23 @@ class Signup extends Component {
         " " +
         this.state.location
     );
-    // event.preventDefault()
+
+      fetch("http://localhost:8088/users")
+      // Must be explicit on how to parse the response
+      .then(r => r.json())
+
+      // JSON parsed data comes to this then()
+      .then(users => {
+          console.log(users)
+      })
+
+    event.preventDefault();
+    this.setState({
+      firstname: "",
+      lastname: "",
+      email: "",
+      location: ""
+    });
   }
 
   render() {
@@ -79,11 +95,13 @@ class Signup extends Component {
           <label>
             Location:
             <select value={this.state.location} onChange={this.locationChange}>
-              <option selected value="">Pick one</option>
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option value="coconut">Coconut</option>
-              <option value="mango">Mango</option>
+              <option selected value="">
+                Pick one
+              </option>
+              <option value="Nashville">Nashville</option>
+              <option value="Memphis">Memphis</option>
+              <option value="Knoxville">Knoxville</option>
+              <option value="Chattanooga">Chattanooga</option>
             </select>
           </label>
           <input type="submit" value="Submit" />
