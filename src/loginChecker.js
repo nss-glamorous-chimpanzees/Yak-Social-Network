@@ -1,28 +1,26 @@
-// import React, {Component} from 'react';
+import React, {Component} from 'react';
 
-// class UserChecker extends Component {
-// constructor() {
-//     super();
+class UserChecker {
 
-//     this.state = {
-//         email: "",
-//         userId: "",
-//         password: "",
-//     }
 
-//     componentDidMount() ;{
+
+    
+
+    componentDidMount() { 
         
-//         fetch(`http://localhost:8088/users/${this.props.userId}`)
-//             .then(response => response.json())
-//             .then(data => {
-//                 this.setState({
-//                     email: data.email,
-//                     userId: data.userId,
-//                     password: data.password
-//                 })
-//                 return fetch(`http://localhost:8088/users?id=${this.state.userId}`)
-//             })
-//     }
-// }}
+        fetch(`http://127.0.0.1:8088/users?email=me@fake.noway&password=password`)
+            .then(response => response.json())
+            .then(data => {
+                // this.setState({
+                //     email: data.email,
+                //     userId: data.userId,
+                //     password: data.password
+                // })
+                // 
+                console.log(data)
+                
+            })
+    }
+}
 
-// export default UserChecker;
+export default UserChecker;
