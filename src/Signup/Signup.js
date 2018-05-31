@@ -1,35 +1,67 @@
 import React, { Component } from "react";
 
 class Signup extends Component {
-  state = {
-    email: "paul@paul.com",
-    password: "paul"
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstname: "",
+      lastname: "",
+      email: ""
+    };
+
+    this.firstnameChange = this.firstnameChange.bind(this);
+    this.lastnameChange = this.lastnameChange.bind(this);
+    this.emailChange = this.emailChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
+  firstnameChange(event) {
+    this.setState({ firstname: event.target.value });
+  }
+
+  lastnameChange(event) {
+    this.setState({ lastname: event.target.value });
+  }
+  emailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  handleSubmit(event) {
+    alert(
+      "A name was submitted: " +
+        this.state.firstname + " " + this.state.lastname + " " + this.state.email
+    );
+    // event.preventDefault()
+  }
+
   render() {
     return (
-      
       <form onSubmit={this.handleSubmit}>
+        <label>
+          First Name:
+          <input
+            type="text"
+            value={this.state.firstname}
+            onChange={this.firstnameChange}
+          />
+        </label>
+        <label>
+          Last Name:
+          <input
+            type="text"
+            value={this.state.lastname}
+            onChange={this.lastnameChange}
+          />
+        </label>
         <label>
           Email:
           <input
             type="text"
             value={this.state.email}
-            onChange={this.handleChange}
+            onChange={this.emailChange}
           />
         </label>
-        <label>
-          Password:
-          <input
-            type="text"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </label>
-        <input type="submit" value="Login" />
-        <label>
-          <input type="checkbox" value="Remember Me?" />
-        </label>
+        <input type="submit" value="Submit" />
       </form>
     );
   }
