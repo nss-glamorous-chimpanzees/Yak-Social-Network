@@ -5,7 +5,7 @@ import "./FriendList.css"
 class FriendList extends Component {
     constructor (props) {
         super(props)
-        this.UniqueKey = 1
+        this.uniqueKey = 1
         this.state = {
             friendList: []
         }
@@ -44,7 +44,7 @@ class FriendList extends Component {
         return (
             <div id="friend-list">
                 {this.state.friendList.map(friend => (
-                    <Friend first={friend.first} last={friend.last} location={friend.location} img={friend.image} />
+                    <Friend key={this.uniqueKey++} first={friend.first} last={friend.last} location={friend.location} img={friend.image} />
                 ))}
             </div>
         )

@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
       Chimps be Glam!
         <div id="friends-div">
-          <FriendList userId={this.state.userId}/>
+          <FriendList userId="1"/>
         </div>
       </div>
     );
