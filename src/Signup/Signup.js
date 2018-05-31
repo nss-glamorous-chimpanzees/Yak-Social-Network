@@ -52,6 +52,10 @@ class Signup extends Component {
       // JSON parsed data comes to this then()
       .then(users => {
           console.log(users)
+          // gather email addresses into an array...
+          // check submitted email adderss against existing email addresses...
+          // if it exists, tell user and forward to login page
+          // if doesn't exist, add to user db and forward to login page, passing email/password
       })
 
     event.preventDefault();
