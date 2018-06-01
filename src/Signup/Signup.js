@@ -53,8 +53,8 @@ class Signup extends Component {
     const submittedFirstname = this.state.firstname;
     const submittedLastname = this.state.lastname;
     const submittedEmail = this.state.email;
-    const submittedPassword = this.state.location;
-    const submittedImageUrl = this.state.location;
+    const submittedPassword = this.state.password;
+    const submittedImageUrl = this.state.image;
     const submittedLocation = this.state.location;
 
     fetch(`http://localhost:8088/users?email=${submittedEmail}`)
