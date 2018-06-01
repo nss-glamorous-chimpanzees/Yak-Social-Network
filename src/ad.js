@@ -14,7 +14,7 @@ class Ad extends Component {
         fetch(`http://localhost:8088/ads/${this.props.adId}`)
         .then(response => response.json())
         .then(data => {
-            fetch(`http://localhost:8088/usersads?adId=${this.props.userId}&_expand=ad`)
+            fetch(`http://localhost:8088/usersads?userId=${this.props.userId}&_expand=ad`)
             .then(secondaryResponse => secondaryResponse.json())
             .then(excludedData => {
                 excludedData.forEach(element => {
