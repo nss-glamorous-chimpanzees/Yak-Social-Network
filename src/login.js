@@ -1,6 +1,11 @@
 import React from 'react';
 import Dashboard from './dashboard/Dashboard';
-
+import BasicExample from './Router';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 
 
@@ -28,14 +33,8 @@ class NameForm extends React.Component {
           }
           else{
              let userId = data[0].id
-            sessionStorage.setItem('userId', userId);
-            render();{
-              return (
-                <div>
-                  <Dashboard />
-                </div>
-              )
-            }
+            sessionStorage.setItem('userId', userId); 
+            <Route path="/dashboard/Dashboard"/>
 
             console.log(data[0].id)
 
