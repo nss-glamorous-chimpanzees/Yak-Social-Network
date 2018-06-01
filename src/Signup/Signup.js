@@ -34,6 +34,10 @@ class Signup extends Component {
   }
 
   handleSubmit(event) {
+    // Prevent form from clearing every time submitted
+    event.preventDefault();
+
+    // Store submitted values into variables
     const submittedFirstname = this.state.firstname;
     const submittedLastname = this.state.lastname;
     const submittedEmail = this.state.email;
@@ -45,8 +49,9 @@ class Signup extends Component {
 
       // JSON parsed data comes to this then()
       .then(user => {
-        if (!user) {
-          alert("This email address already exists");
+        // Convert user to string to get undefined if empty (instead of empty array)
+        if (user.toString()) {
+          document.getElementById("emailExistsAlert").removeAttribute("class", "emailexists")
 
           // if doesn't exist, add to user db and forward to login page, passing email/password
         } else {
@@ -63,16 +68,15 @@ class Signup extends Component {
               location: submittedLocation
             })
           });
+          this.setState({
+            firstname: "",
+            lastname: "",
+            email: "",
+            location: ""
+        });
         }
       });
 
-    event.preventDefault();
-    this.setState({
-      firstname: "",
-      lastname: "",
-      email: "",
-      location: ""
-    });
   }
 
   render() {
@@ -116,6 +120,9 @@ class Signup extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <div id="emailExistsAlert" className="emailexists">
+          <p>That email address already exists. Click here to log in.</p>
+        </div>
       </div>
     );
   }

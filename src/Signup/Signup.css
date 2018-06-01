@@ -9,3 +9,7 @@ label {
 input, select {
   display: block;
 }
+
+#emailExistsAlert.emailexists {
+  display: none
+}
