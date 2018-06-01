@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import FriendList from './friends/FriendList';
+import PostList from './posts/PostList';
 
 
 class App extends Component {
@@ -10,6 +11,9 @@ class App extends Component {
       Chimps be Glam!
         <div id="friends-div">
           <FriendList userId="1"/>
+        </div>
+        <div id="posts-div">
+          <PostList userId="1" />
         </div>
       </div>
     );

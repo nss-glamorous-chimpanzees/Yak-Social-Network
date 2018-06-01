@@ -1,0 +1,41 @@
+.post {
+    border: 1px solid black;
+
+}
+.postContent {
+    border: 1px solid black;
+
+}
+
+.postImage {
+
+}
+
+.postDate {
+
+}
+
+.postText {
+
+}
+
+.toFriend {
+
+}
+
+.posterInfo {
+    border: 1px solid blue;
+
+}
+
+.posterImage {
+
+}
+
+.private {
+    border: 1px solid red;
+}
+
+img {
+    display: inline;
+}
