@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import NameForm from './login';
 import FriendList from './friends/Friend'
+import Dashboard from './dashboard/Dashboard';
+
+
+
 class App extends Component {
   render() {
     return (
@@ -11,9 +15,9 @@ class App extends Component {
           <FriendList userId="1"/>
         </div>
       <NameForm />
-       </div>
-       
-    );
+      <Dashboard />
+      </div>
+    )
   }
 }
 

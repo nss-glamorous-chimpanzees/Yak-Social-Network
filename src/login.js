@@ -1,4 +1,5 @@
 import React from 'react';
+import Dashboard from './dashboard/Dashboard';
 
 
 
@@ -28,10 +29,16 @@ class NameForm extends React.Component {
           else{
              let userId = data[0].id
             sessionStorage.setItem('userId', userId);
+            render();{
+              return (
+                <div>
+                  <Dashboard />
+                </div>
+              )
+            }
+
             console.log(data[0].id)
-            // })
-            // 
-            // console.log(data)
+
           }
         })
  }
