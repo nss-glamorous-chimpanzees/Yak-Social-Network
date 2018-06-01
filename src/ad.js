@@ -3,42 +3,59 @@ import './ad.css';
 
 class Ad extends Component {
 
-    state = {
-        adId: 0,
-        adTitle: "",
-        adContent: "",
-        adCompany: ""
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            adId: 0,
+            adTitle: "",
+            adContent: "",
+            adCompany: "",
+            userId: this.props.userId
+        }
     }
+
 
     componentDidMount() {
         fetch(`http://localhost:8088/ads/${this.props.adId}`)
         .then(response => response.json())
         .then(data => {
-            fetch(`http://localhost:8088/usersads?userId=${this.props.userId}&_expand=ad`)
-            .then(secondaryResponse => secondaryResponse.json())
-            .then(excludedData => {
-                excludedData.forEach(element => {
-                    if(element.ad.id !== data.id) {
-                        this.setState({
-                            adTitle: data.title,
-                            adContent: data.content,
-                            adCompany: data.company
-                        })
-                    }
-                });
+            this.setState({
+                adTitle: data.title,
+                adContent: data.content,
+                adCompany: data.company,
+                adId: data.id
             })
         })
     }
+    
+    handleClick = function (e) {
+        const newUserAd = {
+            userId: this.state.userId,
+              adId: e.target.id
+        }
+        fetch('http://localhost:8088/usersads/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUserAd)
+          })
+          this.props.callback(e.target.id)
+   }.bind(this)
 
     render() {
       return (
         <div className="Ad">
             <h2>{this.state.adTitle}</h2>
+            <input type="button" value="Remove Ad" id={this.state.adId} onClick={this.handleClick} />
             <p>{this.state.adContent}</p>
             <p>{this.state.adContent}</p>
         </div>
       );
     }
   }
+
+
   
   export default Ad;
