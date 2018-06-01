@@ -34,29 +34,37 @@ class Signup extends Component {
   }
 
   handleSubmit(event) {
-    alert(
-      "A name was submitted: " +
-        this.state.firstname +
-        " " +
-        this.state.lastname +
-        " " +
-        this.state.email +
-        " " +
-        this.state.location
-    );
+    const submittedFirstname = this.state.firstname;
+    const submittedLastname = this.state.lastname;
+    const submittedEmail = this.state.email;
+    const submittedLocation = this.state.location;
 
-      fetch("http://localhost:8088/users")
+    fetch(`http://localhost:8088/users?email=${submittedEmail}`)
       // Must be explicit on how to parse the response
       .then(r => r.json())
 
       // JSON parsed data comes to this then()
-      .then(users => {
-          console.log(users)
-          // gather email addresses into an array...
-          // check submitted email adderss against existing email addresses...
-          // if it exists, tell user and forward to login page
+      .then(user => {
+        if (!user) {
+          alert("This email address already exists");
+
           // if doesn't exist, add to user db and forward to login page, passing email/password
-      })
+        } else {
+          fetch("http://localhost:8088/users", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              firstname: submittedFirstname,
+              lastname: submittedLastname,
+              email: submittedEmail,
+              location: submittedLocation
+            })
+          });
+        }
+      });
 
     event.preventDefault();
     this.setState({
@@ -99,9 +107,7 @@ class Signup extends Component {
           <label>
             Location:
             <select value={this.state.location} onChange={this.locationChange}>
-              <option selected value="">
-                Pick one
-              </option>
+              <option defaultValue="">Pick one</option>
               <option value="Nashville">Nashville</option>
               <option value="Memphis">Memphis</option>
               <option value="Knoxville">Knoxville</option>
