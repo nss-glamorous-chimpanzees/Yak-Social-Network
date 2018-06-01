@@ -7,14 +7,18 @@ class Signup extends Component {
     this.state = {
       firstname: "",
       lastname: "",
-      email: "",
-      location: ""
+      location: "",
+      password: "",
+      image: "",
+      email: ""
     };
 
     this.firstnameChange = this.firstnameChange.bind(this);
     this.lastnameChange = this.lastnameChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
     this.locationChange = this.locationChange.bind(this);
+    this.passwordChange = this.passwordChange.bind(this);
+    this.emailChange = this.emailChange.bind(this);
+    this.imageChange = this.imageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -29,8 +33,16 @@ class Signup extends Component {
     this.setState({ email: event.target.value });
   }
 
+  imageChange(event) {
+    this.setState({ image: event.target.value });
+  }
+
   locationChange(event) {
     this.setState({ location: event.target.value });
+  }
+
+  passwordChange(event) {
+    this.setState({ password: event.target.value });
   }
 
   handleSubmit(event) {
@@ -41,6 +53,8 @@ class Signup extends Component {
     const submittedFirstname = this.state.firstname;
     const submittedLastname = this.state.lastname;
     const submittedEmail = this.state.email;
+    const submittedPassword = this.state.location;
+    const submittedImageUrl = this.state.location;
     const submittedLocation = this.state.location;
 
     fetch(`http://localhost:8088/users?email=${submittedEmail}`)
@@ -51,7 +65,9 @@ class Signup extends Component {
       .then(user => {
         // Convert user to string to get undefined if empty (instead of empty array)
         if (user.toString()) {
-          document.getElementById("emailExistsAlert").removeAttribute("class", "emailexists")
+          document
+            .getElementById("emailExistsAlert")
+            .removeAttribute("class", "emailexists");
 
           // if doesn't exist, add to user db and forward to login page, passing email/password
         } else {
@@ -62,21 +78,24 @@ class Signup extends Component {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              firstname: submittedFirstname,
-              lastname: submittedLastname,
-              email: submittedEmail,
-              location: submittedLocation
+              first: submittedFirstname,
+            last: submittedLastname,
+            email: submittedEmail,
+            password: submittedPassword,
+            image: submittedImageUrl,
+            location: submittedLocation
             })
           });
           this.setState({
-            firstname: "",
-            lastname: "",
-            email: "",
-            location: ""
-        });
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: '',
+            image: '',
+            location: ''
+          });
         }
       });
-
   }
 
   render() {
@@ -106,6 +125,22 @@ class Signup extends Component {
               type="text"
               value={this.state.email}
               onChange={this.emailChange}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={this.passwordChange}
+            />
+          </label>
+          <label>
+            Image URL:
+            <input
+              type="text"
+              value={this.state.image}
+              onChange={this.imageChange}
             />
           </label>
           <label>
